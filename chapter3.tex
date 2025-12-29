@@ -1,0 +1,159 @@
+\chapter{Data and Methodology}
+\label{chap:methodology}
+
+\section{Research Design and Analytical Logic}
+\label{sec:research-design}
+
+This chapter explains the data structure and the methods used to predict enrollment demand and identify how observable institutional characteristics and affordability conditions add predictive power to persistence. The setup is deliberately two-fold. A forecasting track tests models under a deployment-realistic validation scheme, whereas a determinants track uses interpretable statistical specifications to describe the relationship between candidate drivers and enrollment outcomes. The major methodological limitation is time: forecasts of year $t$ can only be made by using information from year $t-1$ or earlier. Therefore, the modeling pipeline keeps training in time-order and uses lagged variables to avoid leaking information.
+
+The institution-year is the unit of analysis, i.e., the panel is indexed by the IPEDS unique identifier (UNITID) and academic year. The institution-year panel is an efficient representation of how universities and their oversight bodies plan, budget, and evaluate performance. Besides, it offers a good framework for testing if model performance can be generalized to different institutional types, e.g., two-year and four-year institutions, public and private governance regimes, and geographically different labor and demographic contexts.
+
+\section{Data Sources and Provenance}
+\label{sec:data-sources-prov}
+
+This analysis is based on publicly available administrative data that describe American postsecondary institutions. Elements that help identify institutions and their structures are brought in from the Integrated Postsecondary Education Data System (IPEDS), which is a product of the National Center for Education Statistics \citep{nces}. In order to keep the article straightforward with clearly defined variables across years, it counts on the harmonized IPEDS extracts that the Urban Institute Education Data Portal \citep{urbaninstitute} distributes. The extracts feature pressing CSV downloads and standardized naming conventions, thus cutting down on the ambiguity of the longitudinal merges.
+
+There are five IPEDS-derivative topic files being combined: (i) Directory, (ii) Institutional Characteristics, (iii) Admissions and Enrollment, (iv) Student Financial Aid: Grants and Net Price, and (v) Student-faculty ratio. Each topic is a different concept that contributes this information. Directory presents identifiers and location; Institutional Characteristics offer baseline descriptors and some enrollment measures; Admissions and Enrollment gives admissions-funnel counts; financial aid extract exposes net price and grant-related variables that can be used as affordability proxies; and student-faculty ratio is considered as an approximate capacity indicator.
+
+Data lineage has been given a formal feature. The merged panel keeps topic-related prefixes in variable names (for instance, \texttt{dir\_}, \texttt{ic\_}, \texttt{adm\_}, \texttt{sfa\_}, and \texttt{sfr\_}) so that each characteristic could come from its source. This rule is significant regarding auditability and understanding the results in institutional areas, where the stakeholders need to know how the variables were measured and reported.
+
+\section{Study Period, Population, and Analytic Sample}
+\label{sec:study-period}
+
+The period of study is from 2010 through 2021. This time frame is sufficient for time-ordered validation and encompasses a variety of macro conditions that affect the demand for postsecondary education, while also representing the practical availability of harmonized variables across topic files. The integrated dataset consists of 86,798 institution-year observations and 235 variables after the five sources have been merged. The composite key (UNITID, year) is unique after preprocessing, resulting in a panel that is suitable for forecast evaluation without key collisions.
+
+The default analytical population comprises all institutions that appear in the topic files over the study period. Nevertheless, the workflow allows for deterministic segmentation based on institutional control, sector, and geography. Segmentation is more than just descriptive. Enrollment processes vary by institutional types in such a way that they may influence both the data-generating process and the relative performance of alternative models. For example, community colleges may respond more to local labor-market conditions and adult learner dynamics, whereas selective four-year institutions may have higher persistence and different reactions to net price.
+
+\section{Outcome Definition and Predictor Operationalization}
+\label{sec:outcome-predictors}
+
+The main dependent variable is \texttt{adm\_number\_enrolled\_total}, which is the total count of newly enrolled students as per the Admissions and Enrollment extract. This figure reflects the demand of the admissions cycle and is one of the methods to forecast revenue and capacity of operations for the next academic period. The investigation uses the original scales of this result to keep the student count interpretation straightforward. If needed for the effect to be stronger, the $\log(1 + y)$ conversion is used so that the variance can be stabilized and the impact of extremely large schools is moderated.
+
+Predictors are divided into four groups. The first group of predictors is \textbf{persistence}, which is measured by the lagged values of the dependent variable, thereby representing the trend and inertial nature of enrollment series. The second group of \textbf{admissions-funnel variables}, such as \texttt{adm\_number\_applied} and \texttt{adm\_number\_admitted}, represent demand pressure and selectivity indirectly. The third group of \textbf{affordability-related variables} are taken from the financial aid and net price extract and comprise numeric variables of average net price and certain grant-related traits. The fourth group of variables \textbf{capacity and structural proxies} consist of student-faculty ratio and a few institutional characteristics. In the forecasting models, the predictors are allowed to enter in the lagged form ($t-1$), which is in line with decision timing and also to keep a clear distinction between the training data and the forecast target.
+
+\section{Data Processing Pipeline}
+\label{sec:data-processing}
+
+Data processing is carried out in three steps: restriction, standardization, and integration. Restriction works by shortening each topic file to the study years only. Standardization keeps the key types consistent, for example, converting year to integer and considering identifier fields as strings if leading zeros are present. Integration brings together the topic files on the composite key (UNITID, year), with the Directory file used as the basis to keep the institutional identifiers. Topic-specific prefixes are kept to prevent naming conflicts and to keep track of the source.
+
+Within-file duplication is checked since some topic files might have several records per institution-year as a result of reporting disaggregation or revisions. Exact duplicates are deleted. For the rest of the key duplicates, the pipeline merges records into one institution-year by choosing the first non-missing value per field and keeping diagnostic reports of the archived records. This regulation is conservative: to be clear and reproducible, it focuses on exposure and the highest transparency and reproducibility rather than on aggressive aggregation which may unexpectedly combine substantively different subrecords.
+
+The baseline specification has been kept deliberately minimal in terms of outlier handling, which is a reflection of the nature of the data being administrative and the risk of discarding legitimate extreme institutions. However, robustness checks do look at the extent to which the results are affected by the winsorization of the most highly skewed numeric predictors and the log-transforms of the dependent variable. When models that are dependent on scale and collinearity have been identified, regularization (Ridge) and nonlinear ensembles (Random Forest) techniques are applied to stabilize the estimation process.
+
+\subsection{Missing-Data Strategy}
+\label{subsec:missing-data-strategy}
+
+Missing values are measured and disclosed as descriptive analysis. For model estimation, the pipeline uses training-window imputation technique so that no information from the test period can be used for imputation. Numeric predictors are filled with the median calculated from the training set. Categorical predictors are filled with the most frequent category. To be sure that the models are not unstable due to the presence of scarcely observed variables, features with a low proportion of non-missing or near-zero variance are excluded dynamically from the training data. This method helps to minimize numerical issues and reinforces generalization, especially in high-dimensional situations where a large number of institutional characteristics are only occasionally reported.
+
+\section{Forecasting Methodology}
+\label{sec:forecasting-methodology-ch3}
+
+The forecasting element is deliberately comparative. Instead of choosing one model beforehand, the research compares a series of models that become more complex. This layout helps to unambiguously understand the marginal gains: each model is measured against a naive persistence benchmark that represents the usual strong autoregressive pattern in institutional enrollment time series.
+
+\subsection{Baseline Forecasts}
+\label{subsec:baseline-forecasts}
+
+Two baselines are used. The \textbf{naive persistence forecast} is defined as:
+\begin{equation}
+\hat{y}_{i,t} = y_{i,t-1}
+\label{eq:naive-forecast}
+\end{equation}
+where $i$ represents the index of the institutions. This standard is challenging to surpass in many administrative time series and it thus offers a very strict reference point.
+
+The \textbf{moving average baseline} is given by:
+\begin{equation}
+\hat{y}_{i,t} = \frac{1}{k} \sum_{j=1}^{k} y_{i,t-j}
+\label{eq:moving-average}
+\end{equation}
+employing a $k$-year window and demanding a complete history of lags. The moving average is a very basic smoothing technique that can lessen the short-term fluctuations of small institutions.
+
+\subsection{ARIMA Modelling on Aggregate Series}
+\label{subsec:arima-modeling}
+
+For aggregate modeling, enrollment is summed across institutions within the analytic segment:
+\begin{equation}
+Y_t = \sum_{i} y_{i,t}
+\label{eq:aggregate-enrollment}
+\end{equation}
+Such aggregation results in a single annual series with fewer missing years and more stable dynamics, thus providing a legitimate basis for ARIMA estimation.
+
+In the Box-Jenkins framework, an ARIMA$(p, d, q)$ model may be expressed as:
+\begin{equation}
+\phi(B) (1 - B)^d Y_t = \theta(B) \varepsilon_t
+\label{eq:arima-general}
+\end{equation}
+where $B$ denotes the backshift operator, $\phi(B)$ is the autoregressive polynomial, $\theta(B)$ is the moving-average polynomial, and $\varepsilon_t$ is a white-noise innovation \citep{box1970}. The model orders are determined through constrained grid search over small $p$, $d$, and $q$ values, and AIC serves as the selection criterion. Such a conservative search reflects the limited annual sample size and thus avoids unstable high-order specifications.
+
+\subsection{Multivariate Panel Models}
+\label{subsec:multivariate-models}
+
+Multivariate models include lagged predictors which are a representation of admissions funnel pressure, affordability conditions, and capacity proxies. As a regularized linear benchmark, Ridge regression is applied. The Ridge estimator minimizes:
+\begin{equation}
+\sum_i (y_i - X_i\beta)^2 + \lambda \|\beta\|^2
+\label{eq:ridge}
+\end{equation}
+thus shrinking coefficients toward zero in order to reduce variance when predictors are correlated \citep{hoerl1970}. The model is used to estimate the training window and is tested on the next year through walk-forward validation.
+
+A Random Forest regressor is a highly adaptable nonlinear benchmark that allows for the capture of interactions and nonlinear responses without the need for explicit specification. A forest is made up of an ensemble of decision trees each trained on a bootstrap sample with random feature subsampling; predictions are the average of trees \citep{breiman2001}. The hyperparameters are chosen in a way to optimally achieve generalization thus a minimum leaf size is included which makes the model less sensitive to noise in small institutions. Variable importance is presented as a help to interpretation with the understanding that importance scores represent the level of predictive contribution and not the causal effect.
+
+\section{Determinants and Explanatory Modelling}
+\label{sec:determinants-modeling}
+
+For the sake of interpretability, the research tries to estimate an OLS model with year fixed effects and robust standard errors. The base model is specified as:
+\begin{equation}
+y_{i,t} = \alpha + \rho y_{i,t-1} + \gamma' X_{i,t-1} + \delta_t + u_{i,t}
+\label{eq:panel-regression}
+\end{equation}
+where $X_{i,t-1}$ is a vector of lagged admissions-funnel, affordability, and capacity measures and $\delta_t$ represents a complete set of year dummies. The addition of $y_{i,t-1}$ is to capture the fact that the model is persistent, hence $\gamma$ can be seen as an association with changes in the mean level of the process. Robust (HC3) standard errors are used to address heteroskedasticity problems that are typical in count outcomes and heterogeneous institution scales.
+
+The determinants analysis is explicitly associational. Although predictors are lagged to improve temporal plausibility, the administrative data do not allow for strong causal claims without an identification strategy. Therefore, the findings are seen as indicative of a predictive association and possible levers for the institution's consideration, which is in line with the explanatory versus predictive modelling distinction \citep{shmueli2010}.
+
+\section{Validation Design and Performance Metrics}
+\label{sec:validation-design}
+
+Evaluation employs rolling-origin validation. For each test year $\tau$, the training set contains all the observations with year $< \tau$ and the test set comprises observations with year $= \tau$. This cross-validation design is consistent with the real-world scenario, in which models are trained using past data and then used to generate forecasts for the coming cycle. Furthermore, it precludes from leakage that would occur when randomly splitting panel data with temporal dependence \citep{hyndman2021}.
+
+Three different performance metrics are used:
+
+\textbf{Mean Absolute Error (MAE):}
+\begin{equation}
+\text{MAE} = \frac{1}{n} \sum_i |y_i - \hat{y}_i|
+\label{eq:mae}
+\end{equation}
+
+\textbf{Root Mean Squared Error (RMSE):}
+\begin{equation}
+\text{RMSE} = \sqrt{\frac{1}{n} \sum_i (y_i - \hat{y}_i)^2}
+\label{eq:rmse}
+\end{equation}
+
+\textbf{Mean Absolute Percentage Error (MAPE):}
+\begin{equation}
+\text{MAPE} = \frac{100}{n} \sum_i \left|\frac{y_i - \hat{y}_i}{y_i}\right|
+\label{eq:mape}
+\end{equation}
+An epsilon correction is applied in the implementation to avoid division by zero.
+
+MAE is mainly highlighted due to its straightforwardness when talking about student numbers, whereas RMSE reveals more to large deviations. MAPE is mainly intended for scale-normalized comparison and is being cautiously interpreted for institutions with a small number of students.
+
+\section{Robustness and Sensitivity Analyses}
+\label{sec:robustness-ch3}
+
+Robustness checks are performed to confirm that the conclusions are not merely due to a single modeling decision. The feature set is changed in different ways firstly by applying alternative missingness thresholds and excluding predictors with low coverage. The dependent variable is then transformed using $\log(1 + y)$ to check the sensitivity to scale. Thirdly, the results are compared over different hyperparameter settings, for example, regularization strength for Ridge and tree depth controls for Random Forest. Fourth, the same analyses are conducted within the selected institutional segments, thus allowing the assessment of heterogeneity.
+
+Since the period 2020--2021 covers the time of pandemic disruptions, sensitivity analyses can also be conducted leaving out 2020 or considering it as a stress-test year rather than an ordinary evaluation year. This difference is significant for thesis interpretation: models may have good performance in stable periods but decline when there are structural breaks, and a reasonable evaluation should explicitly present both regimes.
+
+\section{Ethical Considerations and Data Governance}
+\label{sec:ethics}
+
+The study employs public administrative data at the institution level and does not contain any personally identifiable information. However, ethical behavior demands that predictive results be presented in a manner that provides a proper context. Predictions have the power to affect decisions on the allocation of resources and access; thus, the findings are accompanied by explicit uncertainty and a warning against viewing predictive associations as causal mechanisms. In cases where the segment-specific results are not consistent, the dissertation focuses on the interpretation of the context instead of the generalized ranking of the institutions.
+
+\section{Computational Environment and Reproducibility}
+\label{sec:computational-env}
+
+All data processing and analysis are carried out in Python (version 3.11) utilizing \texttt{pandas} for data manipulation, \texttt{statsmodels} for time-series and regression estimation, and \texttt{scikit-learn} for regularized regression and ensemble benchmarks. The workflow is entirely script-based, generating well-structured outputs such as summary tables, diagnostic reports, and figures. To ensure replicability, random seeds are set for stochastic learners. The analysis scripts record run metadata, including segment filters, test years, and hyperparameters, among others, to enable auditability and also to facilitate transparent thesis reporting.
+
+\section{Chapter Summary}
+\label{sec:ch3-summary}
+
+This chapter described building an institution-year panel from the IPEDS (Integrated Postsecondary Education Data System) data and the forecasting and determinants methodologies used in the thesis. Important decisions were: temporal ordering enforcement via walk-forward validation, giving the priority of strong baselines, and mixing interpretable regression specifications with more flexible predictive models. The next chapter presents empirical results, starting with the descriptive characteristics of the analysis sample, followed by comparative forecasting performance and driver interpretation.
