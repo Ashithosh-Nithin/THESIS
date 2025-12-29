@@ -1,0 +1,124 @@
+\chapter{Introduction}
+\label{chap:introduction}
+
+\section{Background and Rationale}
+\label{sec:background}
+
+Enrollment serves as the main channel of communication between universities and the social system, influencing institutional capacity, finances, and strategic direction. Credible enrollment forecasting has become a major issue in the United States over the last ten years as different institutions face varying demographic pressures, changing student preferences, and heightened competition. For public universities reliant on state funding that is often tied to enrollment metrics, inaccurate forecasts can trigger budgetary crises. For private institutions managing financial aid budgets and tuition revenue, enrollment volatility threatens fiscal sustainability and strategic planning.
+
+Forecasting in this context serves two different but related purposes. One is a predictive function: generating quantitative expectations about future enrollment levels to guide operational decisions such as faculty hiring, residence hall capacity planning, and course scheduling. The second is an analytical function: understanding which institutional and external factors drive enrollment changes, enabling administrators to identify levers for strategic intervention. Both are needed for a defensible decision-support approach. Accuracy is crucial since institutional budgets, staffing decisions, and capacity investments depend on enrollment projections. However, accuracy alone is insufficient if the forecasting process lacks transparency or if decision-makers cannot understand which factors contribute to the predictions.
+
+Moreover, the research goes far to consider data realism as a fundamental constraint. Datasets gathered by institutional researchers are not experimental but administrative, meaning they contain missingness, measurement error, duplicates, and structural breaks. Forecasting models must be robust to these realities rather than assuming clean, idealized data. This pragmatic orientation ensures that the methodology developed here can be implemented by practitioners without requiring specialized data infrastructure or extensive data cleaning resources beyond what is typically available in university offices.
+
+\section{Research Problem}
+\label{sec:problem}
+
+There is a wide range of public data available on U.S.\ postsecondary education through sources such as the Integrated Postsecondary Education Data System (IPEDS) and the College Scorecard. However, an alarmingly small proportion of institutions employ data-driven enrollment forecasting methods systematically. Many rely on historical averages, simple trend extrapolation, or subjective judgment, which can produce substantial forecast errors and limit strategic planning effectiveness. The gap between data availability and analytical practice represents an opportunity for methodological contributions that bridge theoretical forecasting techniques and operational institutional research.
+
+One major methodological challenge is that enrollment figures usually show a lot of persistence. In many cases, year-to-year correlation in enrollment exceeds 0.95, meaning that next year's enrollment is highly predictable from this year's enrollment alone. This high autocorrelation creates a strong baseline benchmark: any forecasting model must beat the naive assumption that ``next year equals this year'' to justify its complexity. The persistence pattern also implies that the marginal contribution of additional predictors beyond lagged enrollment may be small, posing a challenge for model improvement.
+
+Meanwhile, through policies and behaviors that are embedded in the admissions funnel and pricing and financial aid strategies, institutions actively manage their enrollment outcomes. Variables such as the number of applications received, admissions offered, average grant aid, and net price reflect both demand-side pressures and supply-side institutional responses. Disentangling the predictive power of these variables from the confounding influence of institutional strategy requires careful modeling and transparent interpretation.
+
+The research problem is thus a matter of both prediction and explanation: what are the ways to effectively forecast institution-level enrollment, and which factors drive enrollment demand after controlling for persistence? Addressing this dual problem requires integrating forecasting techniques (such as time-series models and machine learning regression) with driver analysis (such as panel regression with fixed effects) to produce both accurate predictions and interpretable insights into the mechanisms behind enrollment changes.
+
+\section{Aim and Objectives of the Study}
+\label{sec:aim-objectives}
+
+The researchers aim to work out, carry out, and frontline test the empirical forecast model of university enrollment as well as to systematically find out its drivers using administrative panel data. This aim encompasses both methodological rigor (ensuring that forecasts are evaluated using proper temporal validation protocols and benchmarked against strong baselines) and practical relevance (producing insights that institutional researchers and enrollment managers can implement without specialized expertise).
+
+To achieve this aim, the study pursues the following objectives:
+
+\begin{enumerate}[leftmargin=1.2cm]
+\item By combining directory data, institutional features, enrollment funnel metrics, cost of attendance statistics, and student aid data from IPEDS and the College Scorecard, construct a comprehensive panel dataset spanning 2010 to 2021 that captures both cross-sectional heterogeneity and temporal dynamics.
+
+\item Define and justify an outcome variable for enrollment demand forecasting, focusing particularly on total first-time enrollment as a key flow variable that directly reflects the admissions funnel and is actionable for institutional planning.
+
+\item Conduct exploratory data analysis for the characterization of distributional properties, temporal trends, missing data patterns, and correlations among key variables, establishing empirical regularities that inform model specification.
+
+\item Create baseline forecasting models, for example, naive persistence and moving-average smoothers, and use them as benchmarks to evaluate whether more complex approaches provide meaningful improvements in out-of-sample accuracy.
+
+\item Model a structured time-series specification for the segment-level aggregate series to find out whether ARIMA models can capture national or sectoral enrollment trends that may not be visible at the institution level.
+
+\item Use interpretable regressions with robust standard errors and year effects to estimate associations between enrollment demand and potential drivers such as admissions funnel variables (applications, admissions), affordability indicators (net price, grant aid), and institutional characteristics.
+
+\item Use the results as a basis for both methodological and practical recommendations, including guidance on model selection, the importance of walk-forward validation, the role of baseline benchmarking, and the interpretation of driver effects in observational settings.
+\end{enumerate}
+
+\section{Object and Subject of the Research}
+\label{sec:object-subject}
+
+This research is focused on the annual enrollment demand in U.S.\ higher education institutions. Demand is operationalized as total first-time enrollment in the fall term, which represents the number of new students matriculating for the first time at an institution. This measure is more directly influenced by admissions and recruitment strategies than total headcount, which includes continuing students and reflects retention patterns. By focusing on first-time enrollment, the study isolates the demand-side dynamics that are most relevant for enrollment forecasting and strategic intervention.
+
+This research subject is a group of statistical patterns that describe how enrollment demand is related to lagged enrollment, admissions funnel metrics, affordability indicators, and institutional characteristics across time and institutions. The analysis employs panel data methods to exploit both within-institution temporal variation and cross-institutional heterogeneity. The emphasis is on identifying predictable patterns that can improve forecasting accuracy and on understanding which factors are associated with enrollment demand after controlling for persistence and aggregate time trends.
+
+\section{Research Questions and Hypotheses}
+\label{sec:rq-hypotheses}
+
+The study is structured around two research questions:
+
+\textbf{RQ1:} Given a walk-forward evaluation setup that eliminates temporal leakage, which forecasting methods (baseline persistence, moving averages, ARIMA models, or machine learning panel regressions) produce the most accurate institution-level enrollment predictions as measured by mean absolute error (MAE) and root mean squared error (RMSE)?
+
+\textbf{RQ2:} By controlling for persistence and year effects, which university and affordability-related factors (admissions funnel metrics such as applications and admissions; affordability indicators such as net price and grant aid) demonstrate stable statistical associations with enrollment demand in a panel regression framework?
+
+Two hypotheses are evaluated:
+
+\textbf{H1:} Forecasting models with time-series structures or lagged predictors would do better than a naive persistence baseline by at least 10\% in terms of MAE or RMSE when evaluated on out-of-sample data using walk-forward validation. This hypothesis reflects the expectation that incorporating additional information beyond last year's enrollment should improve forecast accuracy meaningfully.
+
+\textbf{H2:} Admissions funnel metrics and affordability indicators such as applications, admissions, net price, and grant aid will show statistically significant associations ($p < 0.05$) with enrollment demand in a panel regression that controls for lagged enrollment and year fixed effects. This hypothesis tests whether these variables contribute explanatory power beyond simple persistence, which would justify their inclusion in forecasting models and support their use as strategic levers in enrollment management.
+
+\section{Scope, Assumptions, and Limitations}
+\label{sec:scope-assumptions}
+
+The analysis is done at the institution-year level of the annual unit over the years 2010 to 2021. This temporal scope encompasses diverse macroeconomic and demographic contexts, including the aftermath of the Great Recession, a period of relative enrollment stability, and the onset of the COVID-19 pandemic in 2020. The dataset includes degree-granting postsecondary institutions in the United States that report to IPEDS, covering public, private nonprofit, and private for-profit sectors across various Carnegie Classifications. This broad institutional coverage ensures that findings are representative of the diversity in U.S.\ higher education, though segmented analyses by sector and selectivity are also conducted to assess heterogeneity in model performance.
+
+The empirical design is underpinned by three assumptions. The first assumption is that the study considers historical patterns that are useful for short-term forecasting. It is reasonable to assume that enrollment processes exhibit sufficient temporal stability that models trained on past data can generate accurate one-year-ahead forecasts. This assumption breaks down during unprecedented external shocks, such as the COVID-19 pandemic, which is explicitly examined as a robustness check. The second assumption is that administrative data from IPEDS, while imperfect, are sufficiently accurate and complete for forecasting purposes after appropriate cleaning and imputation. The third assumption is that associations estimated from observational data reflect predictive relationships rather than causal effects. The study does not claim that interventions based on the identified drivers will produce the same effects observed in the regression, as endogeneity and omitted variable bias are unavoidable in administrative panel data.
+
+There are a few limitations to this research. In public higher education datasets, there are also missing data, measurement error, and reporting inconsistencies. Missing enrollment data are not random but systematically higher among smaller institutions, proprietary schools, and those not participating in federal student aid programs. This missingness may introduce selection bias if omitted institutions differ systematically in their enrollment dynamics. The study addresses this limitation by restricting the analysis to institutions with sufficient temporal coverage and documenting missing data patterns transparently.
+
+Another limitation is the heterogeneity of institutions. Universities vary in terms of sector, mission, selectivity, geography, and size, and these differences may moderate the effectiveness of forecasting models and the strength of driver associations. While the main analysis pools all institutions to maximize sample size and statistical power, segmented analyses by sector and selectivity are conducted as sensitivity checks. However, sample sizes within some segments may be insufficient to detect smaller effects.
+
+Lastly, the evaluation is one of the history. Instead of using real-time deployment, the research uses walk-forward validation on historical test years. This approach simulates operational forecasting conditions but does not account for potential changes in data structures or institutional behavior after 2021. Extensions of this work could monitor model performance prospectively to assess whether historical patterns continue to hold in future periods.
+
+\section{Methods Overview}
+\label{sec:methods-overview}
+
+The methodology integrates data preparation, exploratory analysis, forecasting, and driver analysis in a cohesive framework. Data preparation involves merging multiple IPEDS survey components, handling missing values, deduplicating records, and creating lagged variables that respect temporal ordering. Exploratory data analysis characterizes distributional properties, temporal trends, and bivariate correlations, providing empirical motivation for modeling choices.
+
+Forecasting methods include baseline models (naive persistence and moving averages), ARIMA models applied to aggregate time series, and machine learning panel regressions (Ridge regression and Random Forest) that incorporate admissions funnel and affordability variables. All models are evaluated using walk-forward validation, which splits the data temporally into training and test sets such that forecasts are made only using information available prior to the forecast date. Performance is assessed using mean absolute error (MAE), root mean squared error (RMSE), and mean absolute percentage error (MAPE).
+
+Driver analysis employs panel regression with year fixed effects and robust standard errors clustered by institution. The dependent variable is total first-time enrollment in year $t$, and predictors include lagged enrollment, lagged admissions funnel metrics (applications, admissions), and lagged affordability indicators (net price, grant aid). Regression coefficients are interpreted as associations controlling for persistence and common time trends, not as causal effects. Feature importance from Random Forest models complements the regression analysis by identifying which predictors contribute most to reducing forecast error.
+
+\section{Expected Outcomes and Contributions}
+\label{sec:outcomes-contributions}
+
+The study expects to produce several empirical and methodological contributions. Empirically, the research will establish whether sophisticated forecasting models (ARIMA, Ridge, Random Forest) meaningfully outperform simple baselines (naive persistence, moving averages) for institution-level enrollment. If complex models do not consistently beat the baseline, this finding would support the use of parsimonious approaches in operational settings and caution against over-reliance on ``black box'' machine learning methods without rigorous backtesting.
+
+The driver analysis is expected to reveal which admissions funnel and affordability variables show stable associations with enrollment demand after controlling for persistence. If variables such as applications and admissions exhibit significant coefficients, this would justify their inclusion in forecasting models and support data-driven enrollment management strategies. Conversely, if affordability indicators such as grant aid show weak or inconsistent associations, this would suggest that price effects are confounded by institutional strategy or that measurement challenges limit their predictive utility.
+
+Methodologically, the research contributes by demonstrating the importance of walk-forward validation for time-ordered data, establishing strong baseline benchmarks, and integrating forecasting accuracy with driver interpretation. The study also documents data preparation procedures in sufficient detail that institutional researchers can replicate the methodology using their own IPEDS downloads, enhancing the practical applicability of the findings.
+
+From a policy and practice perspective, the findings will inform enrollment management by clarifying which forecasting methods are most accurate, which predictors are most informative, and how institutions should interpret and act on forecast outputs. The study will also highlight the limitations of forecasting in the presence of external shocks, such as the COVID-19 pandemic, and recommend scenario planning as a complement to point forecasts.
+
+\section{Scientific Novelty and Practical Significance}
+\label{sec:novelty-significance}
+
+The article is methodological and integrative in its contribution. At first, it describes a reproducible procedure of generating an institution-year panel from various public sources as well as giving a detailed explanation of how duplicates and missingness are dealt with. It is important because most forecasting models research papers are based on the assumption that data is sourced from a clean environment whilst, in fact, institutional analysts verify and harmonize data extensively. By carefully documenting and applying the preprocessing rules, the paper closes the gap between the theoretical models and data issues in the real world.
+
+Second, the research emphasis is on walk-forward validation instead of random train-test splits for time-ordered data. The selected approach here is a great help in getting rid of the typical optimistic bias associated with random train-test splits in time-ordered data. Besides, the paper is very much into establishing a firm baseline for comparison. In the context of enrollment forecasting, persistence is generally referred to as the strongest predictor, and thus, models that do not surpass a naive baseline might not be justified for their complexity. Making this benchmark prominent allows for a clearer understanding of what comes as a real methodological advancement.
+
+Next, the article connects prediction with the assessment of drivers. Rather than presenting factors as an entirely different regression analysis, the study explores which elements contribute to enhancing forecast accuracy and their stability after controlling for persistence and year effects. This comprehensive perspective is more in line with a manager's understanding. For example, it emphasizes whether affordability measures give extra predictive signals over and above the admissions funnel metrics, thus answering questions of significance for strategic planning.
+
+The practical significance is understandable directly. The framework can be applied as a decision support tool by admissions and enrollment management, providing transparent baseline expectations and clear diagnostics of where the additional modeling effort is most lucrative. For admission offices in particular, this means real operational benefits: enrollment managers can establish realistic recruitment goals based on historical data rather than purely aspirational guesses, efficiently allocate marketing budgets by targeting segments where the interventions have a real effect, and report enrollment forecasts to university leadership with quantified confidence intervals.
+
+The methodology allows the representative institution to change from reactive enrollment management, where the institution accepts the enrollments that materialize, to proactive strategic planning, where data-driven forecasts guide resource allocation, faculty hiring, residence hall capacity planning, and financial aid budgeting long before the academic year. Besides, it makes responsible use possible by highlighting the limitations, not making causal claims, and encouraging segmentation and auditability. At universities where forecasting is obligatory but analysts' capacity is limited, a robust baseline together with clear backtesting can improve the planning discipline even in the absence of advanced modeling expertise.
+
+\section{Structure of the Thesis}
+\label{sec:structure}
+
+The rest of the thesis is structured as follows. Chapter~\ref{chap:literature} provides a review of the enrollment forecasting and predictive analytics in higher education literature. It outlines the common modeling techniques, discusses the role of evaluation protocols in time-series prediction, and explains the limits to which driver analysis can be interpreted in observational settings.
+
+Chapter~\ref{chap:methodology} unveils the dataset construction journey, the variables used, preprocessing choices, and the modeling approach both for forecasting and determinant assessment.
+
+Chapter~\ref{chap:results} presents the results, including the main findings from the exploratory phase, the benchmark comparisons among forecasting models, as well as the outputs of regression and tree-based driver analyses.
+
+Chapter~\ref{chap:discussion} elaborates the institutional planning implications, states the limitations, and suggests ways of extending the framework such as bringing in more exogenous variables and the forecasting of headcount outcomes if necessary.
