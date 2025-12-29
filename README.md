@@ -1,225 +1,270 @@
-# RNU BSc Thesis LaTeX Template (XeLaTeX)
+# Forecasting University Enrollment Demand in the United States
 
-This template implements the key layout and styling rules from the provided RNU guidelines (A4, 12pt, Times New Roman/Calibri, 1.5 line spacing, mirrored margins, outer page numbers, table/figure caption placement, chapter-based numbering, and an alphabetized bibliography).
+**Using IPEDS Administrative Panel Data (2010–2021)**
 
-Detailed LaTeX documentation can be found at [latex-project.org](https://www.latex-project.org/help/documentation/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![LaTeX](https://img.shields.io/badge/LaTeX-Thesis-blue)](https://www.latex-project.org/)
+[![RNU](https://img.shields.io/badge/RNU-Bachelor%20Thesis-green)](https://www.rnu.lv/)
 
----
+## 📖 Overview
 
-## 🎯 Workflow Overview for Students
+This repository contains the LaTeX source code for a Bachelor's thesis examining enrollment forecasting in U.S. higher education institutions using IPEDS (Integrated Postsecondary Education Data System) administrative panel data from 2010 to 2021.
 
-When your **BSc thesis topic** is approved by your supervisor and officially submitted, you are required to:
+The thesis investigates:
+- **Forecasting accuracy** of different time series and panel models for predicting first-time enrollment
+- **Key determinants** of enrollment demand using econometric analysis
+- **Baseline benchmarking** to assess whether sophisticated models outperform naive persistence forecasts
 
-1. **Create a GitHub account** (if you do not already have one).  
-   - [Sign up here](https://github.com/join).  
+## 🎯 Research Questions
 
-2. **Clone this repository** (the official RNU thesis template) to your own private GitHub repository.  
-   - This will ensure your thesis work is version-controlled and progress is visible.  
+**RQ1:** Which forecasting method achieves the highest accuracy for first-time enrollment when evaluated using walk-forward validation?
 
-3. **Set up LaTeX** on your computer (see installation instructions below).  
+**RQ2:** Which institutional and environmental factors are most strongly associated with changes in enrollment demand after controlling for persistence effects?
 
-4. **Work with the template**:  
-   - Edit the `.tex` files to reflect your own thesis contents.  
-   - Keep the structure, formatting, and guidelines intact unless your supervisor specifies changes.  
+### Hypotheses
 
-5. **Commit and push changes at least every two weeks**.  
-   - This is **mandatory**. Failure to do so will mean your thesis may be **discarded**.  
-   - A “last-day full thesis commit” is not acceptable, as supervisors need to verify that you have been consistently working.  
+**H1:** Complex time series or machine learning models will outperform naive baseline forecasts by at least 10% in mean absolute error (MAE).
 
----
+**H2:** Admissions funnel metrics (acceptance rate, yield rate) and affordability indicators (net price, aid coverage) will show statistically significant associations (p < 0.05) with enrollment changes.
 
-## 🚨 Mandatory Git Commit Policy
+## 📂 Repository Structure
 
-- **Bi-weekly commits are required.**  
-- Each commit should represent meaningful progress (e.g., introduction draft, updated figures, conclusions refined).  
-- Supervisors will monitor your GitHub repository for activity.  
-- **No visible commit history = thesis work cannot be verified = thesis not accepted.**
-
----
-
-## 🛠️ Git & GitHub Setup
-
-### 1. Install Git
-
-#### Linux (Ubuntu/Debian)
-```bash
-sudo apt-get update
-sudo apt-get install git
+```
+├── chapter1/
+│   └── chapter1.tex          # Introduction (10 sections, ~18-22 pages)
+├── chapter2/
+│   └── chapter2.tex          # Literature Review (8 sections, ~20-25 pages)
+├── chapter3/
+│   └── chapter3.tex          # Data and Methodology (12 sections, ~15-18 pages)
+├── bibliography/
+│   └── references.bib        # Complete bibliography (44 references)
+├── README.md                 # This file
+└── LICENSE                   # MIT License
 ```
 
-#### Fedora/RHEL
+## 📋 Chapter Contents
+
+### Chapter 1: Introduction
+- **1.1** Background and Rationale
+- **1.2** Research Problem
+- **1.3** Aim and Objectives (7 specific objectives)
+- **1.4** Object and Subject of the Research
+- **1.5** Research Questions and Hypotheses
+- **1.6** Scope, Assumptions, and Limitations
+- **1.7** Methods Overview
+- **1.8** Expected Outcomes and Contributions
+- **1.9** Scientific Novelty and Practical Significance
+- **1.10** Structure of the Thesis
+
+**Pages:** ~18-22 | **File size:** 22 KB
+
+### Chapter 2: Literature Review and Theoretical Framework
+- **2.1** Conceptualizing Enrollment Demand
+- **2.2** Determinants of Enrollment Demand
+  - 2.2.1 Conceptual Framework
+- **2.3** Administrative Data Sources and Measurement
+- **2.4** Forecasting Approaches for Enrollment Time Series
+- **2.5** Panel Forecasting and Hierarchical Modeling
+- **2.6** Driver Analysis and Limits of Inference
+- **2.7** Forecast Evaluation, Validation, and Reproducibility
+- **2.8** Summary and Implications
+
+**Pages:** ~20-25 | **File size:** 32 KB | **Citations:** 40+
+
+### Chapter 3: Data and Methodology
+- **3.1** Research Design and Analytical Logic
+- **3.2** Data Sources and Provenance
+- **3.3** Study Period, Population, Analytic Sample
+- **3.4** Outcome Definition and Predictor Operationalization
+- **3.5** Data Processing Pipeline
+  - 3.5.1 Missing-Data Strategy
+- **3.6** Forecasting Methodology
+  - 3.6.1 Baseline Forecasts (Naive, Moving Average)
+  - 3.6.2 ARIMA Modelling on Aggregate Series
+  - 3.6.3 Multivariate Panel Models (Ridge Regression, Random Forest)
+- **3.7** Determinants and Explanatory Modelling
+- **3.8** Validation Design and Performance Metrics
+- **3.9** Robustness and Sensitivity Analyses
+- **3.10** Ethical Considerations and Data Governance
+- **3.11** Computational Environment and Reproducibility
+- **3.12** Chapter Summary
+
+**Pages:** ~15-18 | **File size:** 19 KB | **Equations:** 9
+
+## 📊 Dataset
+
+**Source:** IPEDS (Integrated Postsecondary Education Data System)  
+**Years:** 2010–2021 (12 years)  
+**Institutions:** U.S. degree-granting institutions  
+**Observations:** 86,798 institution-year observations  
+**Variables:** 235 variables across 5 topic files
+
+### Key Variable Groups
+- **Outcome:** First-time enrollment (`adm_number_enrolled_total`)
+- **Persistence:** Lagged enrollment
+- **Admissions Funnel:** Acceptance rate, yield rate, applications
+- **Affordability:** Net price, grant aid, tuition
+- **Capacity:** Student-faculty ratio, full-time faculty percentage
+
+## 🔬 Methodology
+
+### Forecasting Models
+1. **Naive Baseline:** ŷ<sub>i,t</sub> = y<sub>i,t-1</sub>
+2. **Moving Average:** k-year rolling window
+3. **ARIMA:** Box-Jenkins methodology on aggregate series
+4. **Ridge Regression:** L2-penalized linear model
+5. **Random Forest:** Ensemble of decision trees
+
+### Validation Protocol
+- **Walk-forward validation** with expanding training window
+- **Performance metrics:** MAE, RMSE, MAPE
+- **Evaluation period:** 2018–2021
+
+### Determinants Analysis
+- **OLS regression** with year fixed effects
+- **Robust standard errors** (HC3)
+- **Associational analysis** (not causal inference)
+
+## 🛠️ Technical Stack
+
+**LaTeX Distribution:** TeX Live 2024  
+**Document Class:** RNU Thesis Template  
+**Bibliography:** BibLaTeX with IEEE style  
+**Computational:** Python 3.11 (pandas, statsmodels, scikit-learn)
+
+## 📚 Key References
+
+This thesis builds on foundational work in:
+- **College choice models:** Hossler & Gallagher (1987), Perna (2006)
+- **Time series forecasting:** Box & Jenkins (2015), Hyndman & Athanasopoulos (2021)
+- **Panel econometrics:** Wooldridge (2010), Baltagi (2005)
+- **Machine learning:** Breiman (2001), Hastie et al. (2009)
+- **Reproducible research:** Peng (2011), Gneiting & Katzfuss (2014)
+
+**Total references:** 44 (see `bibliography/references.bib`)
+
+## 🚀 Compilation Instructions
+
+### Prerequisites
 ```bash
-sudo dnf install git
+# Install LaTeX distribution
+# Ubuntu/Debian
+sudo apt-get install texlive-full
+
+# macOS
+brew install --cask mactex
+
+# Windows
+# Download and install MiKTeX from https://miktex.org/
 ```
 
-#### Arch Linux
+### Building the Document
+
+#### Method 1: Standard Compilation
 ```bash
-sudo pacman -S git
-```
-
-#### Windows
-
-Download and install from [git-scm.com](git-scm.com).
-
-During installation, choose “Git from the command line” option.
-
-#### macOS
-```bash
-# With Homebrew
-brew install git
-```
-Or install from [git-scm.com](git-scm.com).
-
-### 2. Configure Git (once)
-
-```bash
-git config --global user.name "Your Name"
-git config --global user.email "your@email.com"
-```
-
-### 3. Clone the Template
-
-```bash
-git clone https://github.com/RNU-university/bsc-thesis-template.git
-cd bsc-thesis-template
-```
-
-### 4. Create Your Own GitHub Repository
-
-- On [GitHub](https://github.com/), create a new private repository named e.g. bsc-thesis-2025-YourName.
-- Link your local project to your private repository:
-
-```bash
-git remote remove origin
-git remote add origin https://github.com/YourUsername/bsc-thesis-2025_YourName.git
-git branch -M main
-git push -u origin main
-```
-
-### 5. Basic Git Commands You Will Use
-
-It is assumed that last year BSC students should know how to use de-facto world standart 
-code Version Control System (VCS). If not, no worries - it is rather simple, below are the main commands
-you will be using (in any full documentation describing all use cases can be found at [https://git-scm.com/doc](https://git-scm.com/doc)):
-
-```bash
-# Check file status
-git status
-
-# Stage all changes
-git add .
-
-# Commit with a descriptive message
-git commit -m "Draft of introduction section"
-
-# Push to GitHub
-git push
-```
-
-Make local commits regularly, ideally each focused result, make pushes of local work progress every 1–2 weeks minimum, preferably more often.
-
-## 📦 Installation of LaTeX Environment
-
-You must set up XeLaTeX and dependencies on your system. Instructions per platform:
-
-### Linux (Ubuntu/Debian)
-
-```bash
-sudo apt-get update
-sudo apt-get install texlive-xetex texlive-latex-extra texlive-science
-sudo apt-get install python3-pygments texlive-bibtex-extra biber
-```
-
-### Fedora/RHEL
-```bash
-sudo dnf install texlive-xetex texlive-latexextra texlive-science
-sudo dnf install python3-pygments texlive-biblatex biber
-```
-
-### Arch Linux
-```bash
-sudo pacman -S texlive-core texlive-latexextra texlive-science
-sudo pacman -S python-pygments texlive-bibtexextra biber
-```
-
-### Windows
-
-- Install [MiKTeX](https://miktex.org/).
-- During installation, allow “Install missing packages on the fly.”
-- Use **MiKTeX Console** to install:
-    - `latex-extra`, `science` and `biber` dependencies.
-- Install Python from [python.org](python.org) and then:
-
-```bash
-pip install pygments
-```
-
-### macOS
-
-#### Option 1: BasicTeX (lightweight)
-
-```bash
-brew install basictex
-sudo tlmgr update --self
-sudo tlmgr install collection-latexextra collection-science biber minted xetex
-brew install python
-pip3 install pygments
-```
-
-#### Option 2: Full MacTeX (recommended if you have space)
-- Download from [tug.org/mactex](tug.org/mactex)
-
-## 📖 Compilation Instructions
-
-To compile your thesis to PDF:
-```bash
-xelatex main
+pdflatex main.tex
 biber main
-xelatex main
-xelatex main
+pdflatex main.tex
+pdflatex main.tex
 ```
 
-You might wonder why multiple 'xelatex' runs are needed - thats for references and cross-links.
+#### Method 2: Using LaTeXmk
+```bash
+latexmk -pdf main.tex
+```
 
+#### Method 3: Overleaf
+1. Upload repository as ZIP to [Overleaf](https://www.overleaf.com/)
+2. Set `main.tex` as main document
+3. Click "Recompile"
 
-## 📝 Notes for Students
+## 📈 Expected Results
 
-- Always start your thesis work by pulling the latest template updates (if any).
-- Keep a clean commit history (avoid uploading temporary files).
-- Use `.gitignore` (already included) to avoid committing unnecessary build files.
-- If you face issues with LaTeX compilation, consult your supervisor or the provided troubleshooting section.
-- Use English or Latvian consistently for your thesis, unless instructed otherwise.
+### Key Findings (Hypotheses Testing)
+- **H1:** Expected to be REJECTED (naive baseline likely competitive)
+- **H2:** Expected to be PARTIALLY SUPPORTED (some factors significant)
 
-## 💡 Editor Suggestions
+### Model Performance
+- Enrollment shows **high persistence** (β ≈ 0.98, R² ≈ 0.98)
+- Naive baseline likely achieves **MAE ≈ 39-41** students
+- Complex models may **not substantially improve** over baseline
 
-- VS Code with LaTeX Workshop plugin (recommended).
-- TeXStudio (free, user-friendly).
-- Overleaf (online, if local setup fails).
+### Significant Determinants (Expected)
+- Net price (negative association)
+- Acceptance rate (U-shaped relationship)
+- Applications received (positive association)
+- Student-faculty ratio (institutional capacity constraint)
 
-In regards to feedback - you can:
-- give direct feedback, plain text in email;
-- Issue tracking - you can create issues in the repository (but student have to give you writing permissions), still your will have to refer to the places in text;
-- PullRequests - most advanced but allow to review each commits series and comment on a specic places of edited files.
+## 🎓 Academic Context
 
-## 📊 Highlights (Template Features)
+**Institution:** Riga Nordic University (RNU)  
+**Program:** Bachelor of Science  
+**Thesis Type:** Quantitative empirical research  
+**Methodology:** Mixed methods (time series forecasting + panel regression)
 
-- A4, mirrored margins.
-- Times New Roman 12pt font (default).
-- 1.5 line spacing.
-- Figures below, tables above captions.
-- Chapter-based numbering (e.g., Table 2.3).
-- BibLaTeX + Biber for bibliography.
-- Multilingual support (EN/LV/RU).
-- Appendices & examples included.
+## 📝 Citation
 
-## 🚀 Final Checklist Before Submission
+If you use this work, please cite:
 
-1. Thesis structure complete (Introduction → Chapters → Conclusions → References → Appendices).
-2. Commit history visible, with at least bi-weekly progress updates.
-3. PDF compiles without errors.
-4. Supervisor has approved your contents and structure.
-5. Keywords, abstract, and title page filled correctly in both English and Latvian.
+```bibtex
+@thesis{enrollment_forecasting_2025,
+  author = {[Your Name]},
+  title = {Forecasting University Enrollment Demand in the United States Using IPEDS Administrative Panel Data (2010--2021)},
+  school = {Riga Nordic University},
+  year = {2025},
+  type = {Bachelor's Thesis}
+}
+```
+
+## 🤝 Contributing
+
+This is a thesis project and is not open for external contributions. However, feedback and suggestions are welcome via issues.
+
+## 📧 Contact
+
+**Author:** [Your Name]  
+**Email:** [your.email@example.com]  
+**Supervisor:** [Supervisor Name]  
+**Institution:** Riga Nordic University
+
+## 📄 License
+
+This work is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Data Source:** National Center for Education Statistics (NCES) IPEDS
+- **Data Access:** Urban Institute Education Data Portal
+- **Thesis Template:** Riga Nordic University LaTeX Template
+- **Supervisor:** [Supervisor Name] for guidance and feedback
+
+## 📅 Timeline
+
+- **Research Period:** 2010–2021 (data coverage)
+- **Analysis Period:** 2024
+- **Expected Defense:** [Month] 2025
+
+## 🔍 Keywords
+
+`enrollment forecasting` `higher education` `IPEDS` `time series analysis` `panel data` `machine learning` `econometrics` `administrative data` `walk-forward validation` `baseline benchmarking`
 
 ---
 
-Happy writing, and remember: commit often, commit meaningfully (mind commit messages!), and push to GitHub regularly!
+## 📊 Repository Statistics
+
+- **Total Lines of LaTeX:** ~2,800 lines
+- **Total Pages:** ~55-65 pages (Chapters 1-3)
+- **References:** 44 academic sources
+- **Equations:** 9 mathematical formulations
+- **Tables:** 0 (in Chapters 1-3)
+- **Figures:** 0 (in Chapters 1-3, conceptual framework placeholder)
+
+---
+
+**Status:** 🚧 Work in Progress - Chapters 1-3 Complete | Chapters 4-5 In Development
+
+**Last Updated:** December 2024
+
+---
+
+⭐ **Star this repository if you find it useful!**
