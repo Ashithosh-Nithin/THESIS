@@ -1,0 +1,139 @@
+═══════════════════════════════════════════════════════════════════════════════
+📝 HOW TO CUSTOMIZE YOUR TITLE PAGE INFORMATION
+═══════════════════════════════════════════════════════════════════════════════
+
+Your thesis title page is already set with the correct title:
+
+"Forecasting University Enrollment Demand in the United States 
+ Using IPEDS Administrative Panel Data (2010–2021)"
+
+═══════════════════════════════════════════════════════════════════════════════
+✏️ WHAT YOU NEED TO UPDATE IN main.tex
+═══════════════════════════════════════════════════════════════════════════════
+
+Open: main.tex
+
+Find lines 37-51 and update the following placeholders:
+
+ENGLISH VERSION (lines 45-51):
+────────────────────────────────────────────────────────────────────────────────
+Line 46: {Your Full Name}
+         ↓ Replace with: Your actual full name (e.g., "John Smith")
+
+Line 47: {Supervisor Name}
+         ↓ Replace with: Your supervisor's name (e.g., "Dr. Jane Doe, PhD")
+
+Line 48: {Bachelor of Science / Program Name}
+         ↓ Replace with: Your degree program (e.g., "Bachelor of Science in Economics")
+
+Line 49: {Department / School}
+         ↓ Replace with: Your department (e.g., "Department of Economics")
+
+Line 51: {2025}
+         ↓ Replace with: Your submission year (e.g., "2025" or "2024")
+
+LATVIAN VERSION (lines 37-43):
+────────────────────────────────────────────────────────────────────────────────
+Line 38: {Jūsu Pilns Vārds}
+         ↓ Replace with: Your name in Latvian
+
+Line 39: {Vadītāja Vārds}
+         ↓ Replace with: Supervisor's name in Latvian
+
+Line 40: {Bakalaura grāds / Programmas nosaukums}
+         ↓ Replace with: Your degree in Latvian
+
+Line 41: {Nodaļa / Skola}
+         ↓ Replace with: Your department in Latvian
+
+Line 43: {2025}
+         ↓ Replace with: Year
+
+═══════════════════════════════════════════════════════════════════════════════
+📋 EXAMPLE - WHAT IT SHOULD LOOK LIKE AFTER EDITING
+═══════════════════════════════════════════════════════════════════════════════
+
+BEFORE (current placeholders):
+────────────────────────────────────────────────────────────────────────────────
+\setthesisinfoEN
+  {Forecasting University Enrollment Demand in the United States Using IPEDS Administrative Panel Data (2010--2021)}
+  {Your Full Name}
+  {Supervisor Name}
+  {Bachelor of Science / Program Name}
+  {Department / School}
+  {2025}
+
+AFTER (with your actual information):
+────────────────────────────────────────────────────────────────────────────────
+\setthesisinfoEN
+  {Forecasting University Enrollment Demand in the United States Using IPEDS Administrative Panel Data (2010--2021)}
+  {John Michael Smith}
+  {Dr. Jane Elizabeth Doe, PhD}
+  {Bachelor of Science in Economics}
+  {Department of Economics and Business}
+  {2025}
+
+═══════════════════════════════════════════════════════════════════════════════
+✅ CHECKLIST - UPDATE THESE 5 ITEMS IN ENGLISH SECTION:
+═══════════════════════════════════════════════════════════════════════════════
+
+□ Line 46: Your Full Name
+□ Line 47: Supervisor Name
+□ Line 48: Degree / Program Name
+□ Line 49: Department / School
+□ Line 51: Year (if not 2025)
+
+═══════════════════════════════════════════════════════════════════════════════
+🎯 YOUR TITLE PAGE WILL DISPLAY:
+═══════════════════════════════════════════════════════════════════════════════
+
+[University Logo]
+
+Study Programme                          [Your Program Name]
+
+                    [Your Department]
+
+                RIGA NORDIC UNIVERSITY
+                        (RNU)
+
+   Forecasting University Enrollment Demand in the United States
+    Using IPEDS Administrative Panel Data (2010–2021)
+
+                   BACHELOR'S THESIS
+
+Student:        [Your Full Name]
+Supervisor:     [Supervisor Name]
+
+
+                    [City] [Year]
+
+═══════════════════════════════════════════════════════════════════════════════
+💡 TIPS
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Keep the curly braces { } around your text
+2. Don't change the structure, just replace the placeholder text
+3. The title is already complete with (2010--2021) - don't change it
+4. Use two hyphens -- in LaTeX for en-dash (not single -)
+5. Save the file after making changes
+
+═══════════════════════════════════════════════════════════════════════════════
+📍 WHERE TO FIND IT
+═══════════════════════════════════════════════════════════════════════════════
+
+File: rnu_thesis_latex-main/main.tex
+Lines: 37-51
+Section: "Fill these in (example placeholders)"
+
+═══════════════════════════════════════════════════════════════════════════════
+
+After updating main.tex with your information, compile your thesis:
+
+pdflatex main.tex
+biber main
+pdflatex main.tex
+pdflatex main.tex
+
+Your personalized title page will appear in main.pdf!
+
+═══════════════════════════════════════════════════════════════════════════════
