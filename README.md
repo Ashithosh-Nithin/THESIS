@@ -468,7 +468,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📧 Contact
 
 **Author:** Ashithosh Nithin  
-**Email:** Ashithosh Nithin  
+**Email:** ashithosh77@gmail.com  
 **LinkedIn:**   
 **GitHub:** [@Ashithosh-Nithin](https://github.com/Ashithosh-Nithin)
 
