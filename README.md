@@ -469,7 +469,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Author:** Ashithosh Nithin  
 **Email:** Ashithosh Nithin  
-**LinkedIn:** [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)  
+**LinkedIn:**   
 **GitHub:** [@Ashithosh-Nithin](https://github.com/Ashithosh-Nithin)
 
 **Institution:** Riga Nordic University  
