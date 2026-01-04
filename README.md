@@ -418,7 +418,7 @@ Upload the `thesis/` directory to [Overleaf](https://www.overleaf.com) for onlin
 If you use this work in your research, please cite:
 
 ```bibtex
-@mastersthesis{yourname2026enrollment,
+@bachelorthesis{Ashithosh Nithin 2026 enrollment,
   title={Forecasting University Enrollment Demand: IPEDS Data Analysis (2010-2021)},
   author={Ashithosh Nithin},
   year={2026},
