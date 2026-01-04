@@ -420,7 +420,7 @@ If you use this work in your research, please cite:
 ```bibtex
 @mastersthesis{yourname2026enrollment,
   title={Forecasting University Enrollment Demand: IPEDS Data Analysis (2010-2021)},
-  author={[Your Name]},
+  author={Ashithosh Nithin},
   year={2026},
   school={Riga Nordic University},
   type={Bachelor Thesis},
@@ -430,7 +430,7 @@ If you use this work in your research, please cite:
 
 **APA Style:**
 ```
-[Your Name]. (2026). Forecasting university enrollment demand: IPEDS data analysis 
+Ashithosh Nithin. (2026). Forecasting university enrollment demand: IPEDS data analysis 
     (2010-2021) [Bachelor thesis, Riga Nordic University].
 ```
 
@@ -450,7 +450,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- **Supervisor:** [Supervisor Name] for invaluable guidance and feedback
+- **Supervisor:** Andrejs Bondarenko for invaluable guidance and feedback
 - **Riga Nordic University** for institutional support
 - **U.S. Department of Education** for making IPEDS data publicly available
 - **Open-source community** for excellent tools (Python, LaTeX, scikit-learn)
@@ -467,14 +467,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-**Author:** [Your Name]  
-**Email:** [your.email@example.com]  
+**Author:** Ashithosh Nithin  
+**Email:** Ashithosh Nithin  
 **LinkedIn:** [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)  
-**GitHub:** [@yourusername](https://github.com/yourusername)
+**GitHub:** [@Ashithosh-Nithin](https://github.com/Ashithosh-Nithin)
 
 **Institution:** Riga Nordic University  
-**Department:** Management  
-**Program:** Bachelor in Marketing (EBT0008 IB-Marketing)
+**Department:** Information Systems  
+**Program:** Bachelor in information Systems
 
 ---
 
@@ -484,7 +484,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - ✅ **Analysis:** Complete
 - ✅ **Thesis Writing:** Complete
 - ✅ **Pre-Defense Presentation:** Complete
-- 🔄 **Final Defense:** Scheduled for [Date]
+- 🔄 **Final Defense:** Scheduled for 13 january
 - ⏳ **Publication:** Planned submission to [Journal Name]
 
 ---
