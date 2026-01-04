@@ -5,10 +5,10 @@
 [![LaTeX](https://img.shields.io/badge/LaTeX-PDF-green.svg)](https://www.latex-project.org/)
 
 **Bachelor Thesis in Marketing**  
-**Author:** [Your Name]  
+**Author:** Ashithosh Nithin  
 **Institution:** Riga Nordic University, Department of Management  
-**Supervisor:** [Supervisor Name]  
-**Submission Date:** December 2026
+**Supervisor:** Andrejs Bondarenko  
+**Submission Date:** January 2026
 
 ---
 
