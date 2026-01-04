@@ -6,7 +6,7 @@
 
 **Bachelor Thesis**  
 **Author:** Ashithosh Nithin  
-**Institution:** Riga Nordic University, Department of Management  
+**Institution:** Riga Nordic University  
 **Supervisor:** Andrejs Bondarenko  
 **Submission Date:** January 2026
 
