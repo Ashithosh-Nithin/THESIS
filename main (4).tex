@@ -1,0 +1,110 @@
+\documentclass{rnu-thesis}
+
+\usepackage[protrusion]{microtype}
+
+% --- Algorithms (float + pseudocode)
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,shapes.symbols,fit,calc,matrix,graphs}
+\tikzset{>=Stealth}
+
+% --- Code listings
+\lstset{
+  basicstyle=\ttfamily\small,
+  numbers=left,
+  numbersep=6pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  float=htbp,
+  captionpos=t
+}
+
+% --- Bibliography via biblatex ---
+\usepackage[backend=biber,style=ieee,sorting=nty,maxbibnames=99]{biblatex}
+\addbibresource{x_bibliography/references.bib}
+
+% Add compatibility for natbib-style citation commands
+\let\citep\cite
+\let\citet\cite
+
+% ====== Thesis Information ======
+\setthesisinfoLV
+  {Augstskolas Uzņemšanas Pieprasījuma Prognozēšana ASV, Izmantojot IPEDS Administratīvos Paneļa Datus (2010--2021)}
+  {Ashithosh Nithin}
+  {Dr.sc.ing.prof. Andrejs Bondarenko}
+  {Bakalaura grāds datorzinatne un informatikā}
+  {Informācijas sistēmas}
+  {2026}
+
+\setthesisinfoEN
+  {Forecasting University Enrollment Demand in the United States Using IPEDS Administrative Panel Data (2010--2021)}
+  {Ashithosh Nithin}
+  {Dr.sc.ing.prof. Andrejs Bondarenko}
+  {Bachelor of Computer Science and Informatics}
+  {Information Systems}
+  {2026}
+
+% ====== THESIS SCOPE ======
+\setthesisscope
+  {180}% Total pages
+  {15}% Total tables
+  {10}% Total figures
+  {2}% Total algorithms
+  {2}% Total listings
+  {2}% Total annexes
+  {50}% Total references
+
+\begin{document}
+
+\input{a_frontmatter/title_page_lv}
+\clearpage
+\input{a_frontmatter/title_page_en}
+\clearpage
+
+\pagenumbering{arabic}
+
+% ===== Abstracts & Keywords =====
+\input{a_frontmatter/abstract_lv}
+\input{a_frontmatter/abstract_en}
+\input{a_frontmatter/keywords}
+
+% ===== Table of Contents =====
+\tableofcontents
+
+% ---- Meta lists ----
+\clearpage
+\begingroup\let\addcontentsline\relax\listoffigures\endgroup
+
+\clearpage
+\begingroup\let\addcontentsline\relax\listoftables\endgroup
+
+\clearpage
+\begingroup\let\addcontentsline\relax\listofalgorithms\endgroup
+
+\clearpage
+\begingroup\let\addcontentsline\relax\lstlistoflistings\endgroup
+\clearpage
+
+% ===== Chapters =====
+\input{b_chapters/chapter1/chapter1}
+\input{b_chapters/chapter2/chapter2}
+\input{b_chapters/chapter3/chapter3}
+\input{b_chapters/chapter4/chapter4}
+\input{b_chapters/chapter5/chapter5}
+
+% ===== Literature =====
+\printbibliography[heading=bibintoc,title=Literature]
+
+% ===== Appendices =====
+\appendix
+\input{y_backmatter/appendices/appendixA}
+\input{y_backmatter/appendices/appendixB}
+
+% ===== Declarations & Acknowledgments =====
+\input{y_backmatter/declaration}
+\input{y_backmatter/acknowledgments}
+
+\end{document}
