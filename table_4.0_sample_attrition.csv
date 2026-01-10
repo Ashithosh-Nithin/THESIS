@@ -1,0 +1,5 @@
+Filter_Step,Institutions,Observations
+1. All institution-year observations,9373,86798
+2. Target variable (enrollment) present,3060,25846
+3. Training period (2010-2017),2935,17930
+4. Test period with required lags (2018-2021),2021,5755
